@@ -1,0 +1,31 @@
+<button
+  {{on "click" this.handleClick}}
+>
+  call api
+</button>
+<Input id="size" min=1 @type="number" @value={{this.numberOfRows}} />
+
+<button
+  {{on "click" this.updateRows}}
+>
+  update every 10th row
+</button>
+
+{{#if this.isRendered}}
+  <p>rendering</p>
+  <div>
+  {{#each this.fakeArray as |id index| }}
+    {{#if (this.isMod10 index) }}
+      <div style="display: flex; align-items: end; background-color: blueviolet">
+        <div>Some text here {{index}}</div>
+        <button {{on "click" this.deleteRow}}>delete row</button>
+      </div>
+    {{else}}
+    <div style="display: flex; align-items: end">
+      <div>Some text here {{index}}</div>
+      <button {{on "click" this.deleteRow}}>delete row</button>
+    </div>
+    {{/if}}
+  {{/each}}
+  </div>
+{{/if}}
